@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Secret Archive</title>
+
+  <style>
+    body {
+      background: #171923;
+      color: #eee8dc;
+      font-family: Georgia, serif;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .box {
+      max-width: 500px;
+      margin: auto;
+      background: #252a38;
+      padding: 35px;
+      border-radius: 15px;
+    }
+
+    h1 {
+      color: #d6b77c;
+      letter-spacing: 3px;
+    }
+
+    input {
+      padding: 13px;
+      width: 85%;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: #d6b77c;
+      padding: 13px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .secret {
+      color: #e7c88c;
+      font-size: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <h1>THE SECRET ARCHIVE</h1>
+
+  <div id="question1">
+    <h2>Chapter 01</h2>
+    <p>What is 12 multiplied by 12?</p>
+
+    <input id="answer1" placeholder="Enter your answer">
+
+    <br>
+    <button onclick="checkAnswer()">Submit</button>
+  </div>
+
+  <div id="codeSection" class="hidden">
+    <h2>Well done.</h2>
+    <p>You have discovered a secret code:</p>
+
+    <div class="secret">MOON-27</div>
+
+    <p>Enter the code to continue.</p>
+
+    <input id="password" placeholder="Enter secret code">
+
+    <br>
+    <button onclick="unlock()">Unlock</button>
+  </div>
+
+  <div id="question2" class="hidden">
+    <h2>Chapter 02</h2>
+    <p>What is the square root of 144?</p>
+    <input placeholder="Enter your answer">
+  </div>
+
+  <p id="message"></p>
+
+</div>
+
+<script>
+  function checkAnswer() {
+    let answer = document
+      .getElementById("answer1")
+      .value.trim();
+
+    if (answer === "144") {
+      document.getElementById("codeSection")
+        .style.display = "block";
+
+      document.getElementById("message")
+        .innerText = "";
+    } else {
+      document.getElementById("message")
+        .innerText = "Not quite. Try again!";
+    }
+  }
+
+  function unlock() {
+    let code = document
+      .getElementById("password")
+      .value.trim();
+
+    if (code.toUpperCase() === "MOON-27") {
+      document.getElementById("question1")
+        .style.display = "none";
+
+      document.getElementById("codeSection")
+        .style.display = "none";
+
+      document.getElementById("question2")
+        .style.display = "block";
+
+      document.getElementById("message")
+        .innerText = "";
+    } else {
+      document.getElementById("message")
+        .innerText = "Incorrect code. Try again!";
+    }
+  }
+</script>
+
+</body>
+</html>
