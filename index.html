@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Secret Archive | Summer</title>
+  <title>The Secret Archive | Geography</title>
 
   <style>
     * {
@@ -22,8 +22,9 @@
       color: #f5eee4;
 
       background:
-        radial-gradient(ellipse at 50% 0%, rgba(214, 143, 77, 0.4), transparent 60%),
-        linear-gradient(135deg, #38272b, #171923 75%);
+  radial-gradient(circle at 20% 20%, rgba(71, 116, 119, 0.3), transparent 40%),
+  radial-gradient(circle at 80% 80%, rgba(184, 155, 105, 0.18), transparent 40%),
+  linear-gradient(135deg, #101f2b, #1c3038 65%, #17232c);
     }
 
     .box {
@@ -170,6 +171,52 @@
         padding: 35px 22px;
       }
     }
+  /* FINAL SCREEN ANIMATION */
+
+#endingScreen {
+  animation: fadeIn 1.3s ease forwards;
+}
+
+#endingScreen h1 {
+  animation: celebrate 1.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes celebrate {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  70% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.logo-title {
+  font-size: clamp(27px, 6vw, 48px);
+  letter-spacing: 2px;
+}
+
+.ue-highlight {
+  color: #d7ad78;
+}
+
   </style>
 </head>
 
@@ -183,18 +230,20 @@
 
     <div class="sun">☀</div>
 
-    <h1>THE SECRET ARCHIVE</h1>
+    <h1 class="logo-title">
+  CL(<span class="ue-highlight">UE</span>)OUD ATLAS
+</h1>
 
-    <h2>SUMMER</h2>
+    <h2>GEOGRAPHY</h2>
 
     <p>
       Twenty questions. Twenty secrets.
-      One story that stretches across time and place.
+      One world, stretched across time and place.
     </p>
 
     <p>
-      Enter the archive and uncover the mysteries
-      hidden within <em>Cloud Atlas</em>.
+      Travel across oceans, islands, and cities to explore the
+      geographical world of <em>Cloud Atlas</em>.
     </p>
 
     <button class="main-button" onclick="startGame()">
@@ -212,7 +261,7 @@
 
     <div class="sun">☀</div>
 
-    <h1>SUMMER</h1>
+    <h1>GEOGRAPHY</h1>
 
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
@@ -239,10 +288,14 @@
 
     <div id="codeSection" class="hidden">
 
-      <p>
-        Correct. You have discovered a secret code.
-      </p>
+  <p>
+    Correct! Your secret code is:
+  </p>
 
+  <h2 id="secretCodeDisplay"></h2>
+
+  <p>Enter the code below to unlock the next question.</p>
+  
       <input
         type="text"
         id="codeInput"
@@ -265,11 +318,11 @@
 
     <div class="eyebrow">The Secret Archive</div>
 
-    <div class="sun">☀</div>
+    <div class="sun">🧭</div>
 
     <h1 class="ending-title">CONGRATULATIONS!</h1>
 
-    <h2>YOU HAVE ESCAPED SUMMER.</h2>
+    <h2>YOU HAVE ESCAPED GEOGRAPHY.</h2>
 
     <p class="ending-message">
       Twenty questions. Twenty secrets.
@@ -393,6 +446,9 @@
 
         document.getElementById("feedback").textContent =
           "Correct! Now enter the secret code.";
+
+document.getElementById("secretCodeDisplay").textContent =
+  questions[currentQuestion].code;
 
         document.getElementById("codeSection").classList.remove("hidden");
 
