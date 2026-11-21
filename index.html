@@ -3,138 +3,489 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Secret Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Secret Archive | Summer</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #171923;
-      color: #eee8dc;
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-family: Georgia, serif;
-      text-align: center;
-      padding: 70px 20px;
+      color: #f5eee4;
+
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(214, 143, 77, 0.4), transparent 60%),
+        linear-gradient(135deg, #38272b, #171923 75%);
     }
 
     .box {
-      max-width: 500px;
-      margin: auto;
-      background: #252a38;
-      padding: 35px;
-      border-radius: 15px;
-    }
-
-    h1 {
-      color: #d6b77c;
-      letter-spacing: 3px;
-    }
-
-    input {
-      padding: 13px;
-      width: 85%;
-      margin: 15px 0;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      background: #d6b77c;
-      padding: 13px 25px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      width: 100%;
+      max-width: 680px;
+      padding: 45px 32px;
+      text-align: center;
+      background: rgba(17, 19, 27, 0.82);
+      border: 1px solid rgba(226, 190, 139, 0.35);
+      border-radius: 12px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(8px);
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
-    .secret {
-      color: #e7c88c;
-      font-size: 30px;
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #d7ad78;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 52px);
+      letter-spacing: 4px;
+      margin: 0 0 18px;
+      color: #f4dfbd;
+    }
+
+    h2 {
+      font-size: 25px;
+      letter-spacing: 2px;
+      color: #e9c58d;
+    }
+
+    p {
+      color: #d4d0ca;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .sun {
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    button {
+      font-family: Georgia, serif;
+      cursor: pointer;
+      padding: 15px 25px;
+      border: 1px solid #d7ad78;
+      border-radius: 5px;
+      background: rgba(215, 173, 120, 0.12);
+      color: #f4dfbd;
+      font-size: 14px;
+      letter-spacing: 2px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: rgba(215, 173, 120, 0.28);
+      transform: translateY(-2px);
+    }
+
+    .main-button {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.13);
+      border-radius: 10px;
+      margin: 28px 0 12px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #d7ad78;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #b9aa97;
+    }
+
+    .question {
+      font-size: 21px;
+      line-height: 1.7;
+      margin: 35px 0;
+      color: #f3e9dc;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      border: 1px solid rgba(215, 173, 120, 0.45);
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      text-align: center;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #e9c58d;
+    }
+
+    input::placeholder {
+      color: #a9a19a;
+    }
+
+    .feedback {
+      min-height: 28px;
+      margin-top: 16px;
+      color: #e9c58d;
+      font-size: 14px;
+    }
+
+    .ending-title {
+      font-size: clamp(30px, 6vw, 45px);
+      line-height: 1.4;
+    }
+
+    .ending-message {
+      margin-top: 25px;
+      font-style: italic;
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        padding: 35px 22px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="box">
+  <!-- START SCREEN -->
 
-  <h1>THE SECRET ARCHIVE</h1>
+  <main class="box" id="startScreen">
 
-  <div id="question1">
-    <h2>Chapter 01</h2>
-    <p>What is 12 multiplied by 12?</p>
+    <div class="eyebrow">An Interactive Literary Escape Room</div>
 
-    <input id="answer1" placeholder="Enter your answer">
+    <div class="sun">☀</div>
 
-    <br>
-    <button onclick="checkAnswer()">Submit</button>
-  </div>
+    <h1>THE SECRET ARCHIVE</h1>
 
-  <div id="codeSection" class="hidden">
-    <h2>Well done.</h2>
-    <p>You have discovered a secret code:</p>
+    <h2>SUMMER</h2>
 
-    <div class="secret">MOON-27</div>
+    <p>
+      Twenty questions. Twenty secrets.
+      One story that stretches across time and place.
+    </p>
 
-    <p>Enter the code to continue.</p>
+    <p>
+      Enter the archive and uncover the mysteries
+      hidden within <em>Cloud Atlas</em>.
+    </p>
 
-    <input id="password" placeholder="Enter secret code">
+    <button class="main-button" onclick="startGame()">
+      BEGIN
+    </button>
 
-    <br>
-    <button onclick="unlock()">Unlock</button>
-  </div>
+  </main>
 
-  <div id="question2" class="hidden">
-    <h2>Chapter 02</h2>
-    <p>What is the square root of 144?</p>
-    <input placeholder="Enter your answer">
-  </div>
 
-  <p id="message"></p>
+  <!-- GAME SCREEN -->
 
-</div>
+  <main class="box hidden" id="gameScreen">
 
-<script>
-  function checkAnswer() {
-    let answer = document
-      .getElementById("answer1")
-      .value.trim();
+    <div class="eyebrow">The Secret Archive</div>
 
-    if (answer === "144") {
-      document.getElementById("codeSection")
-        .style.display = "block";
+    <div class="sun">☀</div>
 
-      document.getElementById("message")
-        .innerText = "";
-    } else {
-      document.getElementById("message")
-        .innerText = "Not quite. Try again!";
+    <h1>SUMMER</h1>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="progress-label" id="progressLabel">
+      QUESTION 1 OF 20
+    </div>
+
+    <div class="question" id="questionText"></div>
+
+    <input
+      type="text"
+      id="answerInput"
+      placeholder="Enter your answer..."
+      autocomplete="off"
+    >
+
+    <button class="main-button" id="answerButton" onclick="checkAnswer()">
+      SUBMIT ANSWER
+    </button>
+
+    <div class="feedback" id="feedback"></div>
+
+    <div id="codeSection" class="hidden">
+
+      <p>
+        Correct. You have discovered a secret code.
+      </p>
+
+      <input
+        type="text"
+        id="codeInput"
+        placeholder="Enter the secret code..."
+        autocomplete="off"
+      >
+
+      <button class="main-button" onclick="checkCode()">
+        UNLOCK NEXT QUESTION
+      </button>
+
+    </div>
+
+  </main>
+
+
+  <!-- FINAL CONGRATULATIONS SCREEN -->
+
+  <main class="box hidden" id="endingScreen">
+
+    <div class="eyebrow">The Secret Archive</div>
+
+    <div class="sun">☀</div>
+
+    <h1 class="ending-title">CONGRATULATIONS!</h1>
+
+    <h2>YOU HAVE ESCAPED SUMMER.</h2>
+
+    <p class="ending-message">
+      Twenty questions. Twenty secrets.
+      The mystery is complete.
+    </p>
+
+  </main>
+
+
+  <script>
+
+    // ==========================================
+    // SUMMER QUESTIONS
+    // Replace these placeholders with your
+    // actual Cloud Atlas questions and answers.
+    // ==========================================
+
+  const questions = [
+  { question: "In what ocean does Adam Ewing’s voyage take place?", answer: "The Pacific Ocean", code: "ZACHARY-THE-COWARDLY" },
+  { question: "What city is Ewing from?", answer: "San Francisco", code: "NOT-YOUR-AVERAGE-CLONE" },
+  { question: "What country does Frobisher stay in while writing the Cloud Atlas Sextet?", answer: "Belgium", code: "451-MORE-LIKE-1850" },
+  { question: "Where does Timothy Cavendish go after escaping Aurora House?", answer: "Edinburgh", code: "PRETTY-GIRL-IN-ORISON" },
+  { question: "Where is Papa Song's Dinery located?", answer: "Chongmyo Plaza", code: "I'M-HALF-ALIVE" },
+  { question: "What island does Zachry live on?", answer: "Hawaii", code: "HIROSHIMA-IN-SWANEKKE" },
+  { question: "What motif does Mitchell use to examine colonialism, corporate greed, and tribal conflict?", answer: "Islands", code: "COMETS-KILLED-DINOSAURS" },
+  { question: "What group of islands does Ewing visit that isW home to the Moriori people?", answer: "The Chatham Islands", code: "RUSSIAN-DOLL" },
+  { question: "Where does Luisa Rey's mom live?", answer: "Ewingsville Hill", code: "NOT-YOUR-AVERAGE-CLONE" },
+  { question: "What are the toxic, polluted ocean wastelands surrounding Nea So Copros called?", answer: "The Deadlands", code: "NEO-SEOUL" },
+  { question: "Where does Zachry learn the truth about Sonmi?", answer: "Mauna Kea", code: "MULTITUDE-OF-DROPS" },
+  { question: "What feature of Papa Song's Dinery symbolizes the confinement of fabricants?", answer: "Underground", code: "CLOUD-ATLAS-ORISON" },
+  { question: "What post-apocalyptic archipelago marks the geographical endpoint where both Eastern and Western empires have collapsed?", answer: "Ha-why", code: "LET'S-STOP-SMOKE-ING" },
+  { question: "What kind of colonialism appears in the 19th-century South Pacific story?", answer: "European maritime colonialism", code: "OLD-GEORGIE-IS-COMING" },
+  { question: "What does Ewing realize humanity is?", answer: "A multitude of drops", code: "LET-IT-SNOW" },
+  { question: "What does water symbolize in Luisa Rey's and Sonmi's chapters? (Think: HYDRA reactor threatens to poison the surrounding ocean, Deadlands are toxic and polluted)", answer: "Corporate contamination", code: "IT'S-BEGINNING-TO-LOOK-A-LOT-LIKE-CHRISTMAS" },
+  { question: "What do Sonmi's journey up Mount Taemosan and Zachry's ascension up Mauna Kea symbolize?", answer: "Enlightenment", code: "LOL-UISA" },
+  { question: "What coined terms does Mitchell use to contrast wealthy skyscraper-dwelling consumers and impoverished lower-tier citizens in Neo So Copros?", answer: "Upstrata vs downstrata", code: "GO-AWAY-EVA-OKAY-BYE" },
+  { question: "Where is Papa Song's Golden Ark moored?", answer: "Pusan", code: "I-WANT-EVA'S-HORSE" },
+  { question: "What island is the Seaboard HYDRA Nuclear Power Plant located on?", answer: "Swanekke Island", code: "FROBISHER-IS-A-BUM" }
+];
+
+
+    // ==========================================
+    // GAME VARIABLES
+    // ==========================================
+
+    let currentQuestion = 0;
+    let answerCorrect = false;
+
+
+    // ==========================================
+    // START GAME
+    // ==========================================
+
+    function startGame() {
+
+      currentQuestion = 0;
+      answerCorrect = false;
+
+      document.getElementById("startScreen").classList.add("hidden");
+
+      document.getElementById("gameScreen").classList.remove("hidden");
+
+      document.getElementById("endingScreen").classList.add("hidden");
+
+      showQuestion();
+
     }
-  }
 
-  function unlock() {
-    let code = document
-      .getElementById("password")
-      .value.trim();
 
-    if (code.toUpperCase() === "MOON-27") {
-      document.getElementById("question1")
-        .style.display = "none";
+    // ==========================================
+    // DISPLAY QUESTION
+    // ==========================================
 
-      document.getElementById("codeSection")
-        .style.display = "none";
+    function showQuestion() {
 
-      document.getElementById("question2")
-        .style.display = "block";
+      const question = questions[currentQuestion];
 
-      document.getElementById("message")
-        .innerText = "";
-    } else {
-      document.getElementById("message")
-        .innerText = "Incorrect code. Try again!";
+      document.getElementById("questionText").textContent =
+        question.question;
+
+      document.getElementById("progressLabel").textContent =
+        "QUESTION " + (currentQuestion + 1) + " OF 20";
+
+      document.getElementById("progressBar").style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
+
+      document.getElementById("answerInput").value = "";
+
+      document.getElementById("answerInput").disabled = false;
+
+      document.getElementById("codeInput").value = "";
+
+      document.getElementById("feedback").textContent = "";
+
+      document.getElementById("codeSection").classList.add("hidden");
+
+      document.getElementById("answerButton").disabled = false;
+
+      answerCorrect = false;
+
     }
-  }
-</script>
+
+
+    // ==========================================
+    // CHECK ANSWER
+    // ==========================================
+
+    function checkAnswer() {
+
+      const correctAnswer = questions[currentQuestion].answer;
+
+      const userAnswer = document
+        .getElementById("answerInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+      if (userAnswer === correctAnswer.toLowerCase()) {
+
+        answerCorrect = true;
+
+        document.getElementById("feedback").textContent =
+          "Correct! Now enter the secret code.";
+
+        document.getElementById("codeSection").classList.remove("hidden");
+
+        document.getElementById("answerInput").disabled = true;
+
+        document.getElementById("answerButton").disabled = true;
+
+      } else {
+
+        document.getElementById("feedback").textContent =
+          "Not quite. Try again.";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // CHECK SECRET CODE
+    // ==========================================
+
+    function checkCode() {
+
+      if (!answerCorrect) return;
+
+      const correctCode = questions[currentQuestion].code;
+
+      const userCode = document
+        .getElementById("codeInput")
+        .value
+        .trim()
+        .toUpperCase();
+
+      if (userCode === correctCode.toUpperCase()) {
+
+        currentQuestion++;
+
+        if (currentQuestion >= questions.length) {
+
+          showEnding();
+
+        } else {
+
+          showQuestion();
+
+        }
+
+      } else {
+
+        document.getElementById("feedback").textContent =
+          "Incorrect code. Try again.";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // FINAL SCREEN
+    // This is the end of the game.
+    // No next button or automatic transition.
+    // ==========================================
+
+    function showEnding() {
+
+      document.getElementById("gameScreen").classList.add("hidden");
+
+      document.getElementById("endingScreen").classList.remove("hidden");
+
+    }
+
+
+    // ==========================================
+    // ENTER KEY SUPPORT
+    // ==========================================
+
+    document.getElementById("answerInput").addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+        checkAnswer();
+      }
+
+    });
+
+    document.getElementById("codeInput").addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+        checkCode();
+      }
+
+    });
+
+  </script>
 
 </body>
 </html>
