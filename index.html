@@ -473,15 +473,15 @@ function goBackToQuestion() {
           "Correct! Now enter the secret code.";
 
           const secretCode = questions[currentQuestion].code;
-const codeDisplay = document.getElementById("secretCodeDisplay");
+          const codeDisplay = document.getElementById("secretCodeDisplay");
 
-codeDisplay.textContent = "";
+          codeDisplay.textContent = "";
 
-let letterIndex = 0;
+          let letterIndex = 0;
 
-const typing = setInterval(() => {
-  codeDisplay.textContent += secretCode[letterIndex];
-  letterIndex++;
+          const typing = setInterval(() => {
+           codeDisplay.textContent += secretCode[letterIndex];
+           letterIndex++;
 
   if (letterIndex >= secretCode.length) {
     clearInterval(typing);
