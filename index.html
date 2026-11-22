@@ -316,6 +316,52 @@
 
   </main>
 
+   <main class="box hidden" id="accessDeniedScreen">
+
+  <div class="eyebrow">ORISON SECURITY SYSTEM</div>
+
+  <div class="denied-icon">✕</div>
+
+  <h1 class="denied-title">ACCESS DENIED</h1>
+
+  <p class="denied-message">
+    Your response could not be verified.
+    This orison remains locked.
+  </p>
+
+  <p class="denied-submessage">
+    PLEASE TRY AGAIN.
+  </p>
+
+  <button class="main-button" onclick="goBackToQuestion()">
+    ← GO BACK
+  </button>
+
+</main>
+
+.denied-icon {
+  font-size: 55px;
+  color: #c65b55;
+  margin: 20px 0;
+}
+
+.denied-title {
+  color: #c65b55;
+  letter-spacing: 4px;
+}
+
+.denied-message {
+  margin-top: 20px;
+  line-height: 1.7;
+}
+
+.denied-submessage {
+  color: #d7ad78;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin: 25px 0;
+}
+
 
   <!-- FINAL CONGRATULATIONS SCREEN -->
 
@@ -553,52 +599,7 @@ function goBackToQuestion() {
 
       document.getElementById("gameScreen").classList.add("hidden");
 
-      <main class="box hidden" id="accessDeniedScreen">
-
-  <div class="eyebrow">ORISON SECURITY SYSTEM</div>
-
-  <div class="denied-icon">✕</div>
-
-  <h1 class="denied-title">ACCESS DENIED</h1>
-
-  <p class="denied-message">
-    Your response could not be verified.
-    This orison remains locked.
-  </p>
-
-  <p class="denied-submessage">
-    PLEASE TRY AGAIN.
-  </p>
-
-  <button class="main-button" onclick="goBackToQuestion()">
-    ← GO BACK
-  </button>
-
-</main>
-
-.denied-icon {
-  font-size: 55px;
-  color: #c65b55;
-  margin: 20px 0;
-}
-
-.denied-title {
-  color: #c65b55;
-  letter-spacing: 4px;
-}
-
-.denied-message {
-  margin-top: 20px;
-  line-height: 1.7;
-}
-
-.denied-submessage {
-  color: #d7ad78;
-  letter-spacing: 3px;
-  font-size: 12px;
-  margin: 25px 0;
-}
-
+     
       document.getElementById("endingScreen").classList.remove("hidden");
 
     }
