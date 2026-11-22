@@ -219,6 +219,12 @@
   color: #d7ad78;
 }
 
+.typewriter-code {
+  letter-spacing: 3px;
+  color: #d7ad78;
+  min-height: 35px;
+}
+
   </style>
 </head>
 
@@ -290,11 +296,8 @@
 
     <div id="codeSection" class="hidden">
 
-  <p>
-    Correct! Your secret code is:
-  </p>
-
-  <h2 id="secretCodeDisplay"></h2>
+  <p>IDENTITY VERIFIED. DECRYPTING SECRET CODE...</p>
+<h2 id="secretCodeDisplay" class="typewriter-code"></h2>
 
   <p>Enter the code below to unlock the next question.</p>
   
@@ -376,6 +379,15 @@
   { question: "What island is the Seaboard HYDRA Nuclear Power Plant located on?", answer: "Swanekke Island", code: "POOR-FROBISHER" }
 ];
 
+function showAccessDenied() {
+  document.getElementById("gameScreen").classList.add("hidden");
+  document.getElementById("accessDeniedScreen").classList.remove("hidden");
+}
+
+function goBackToQuestion() {
+  document.getElementById("accessDeniedScreen").classList.add("hidden");
+  document.getElementById("gameScreen").classList.remove("hidden");
+}
 
     // ==========================================
     // GAME VARIABLES
@@ -460,8 +472,22 @@
         document.getElementById("feedback").textContent =
           "Correct! Now enter the secret code.";
 
-document.getElementById("secretCodeDisplay").textContent =
-  questions[currentQuestion].code;
+          const secretCode = questions[currentQuestion].code;
+const codeDisplay = document.getElementById("secretCodeDisplay");
+
+codeDisplay.textContent = "";
+
+let letterIndex = 0;
+
+const typing = setInterval(() => {
+  codeDisplay.textContent += secretCode[letterIndex];
+  letterIndex++;
+
+  if (letterIndex >= secretCode.length) {
+    clearInterval(typing);
+  }
+}, 120);
+
 
         document.getElementById("codeSection").classList.remove("hidden");
 
@@ -471,8 +497,7 @@ document.getElementById("secretCodeDisplay").textContent =
 
       } else {
 
-        document.getElementById("feedback").textContent =
-          "Not quite. Try again.";
+        showAccessDenied();
 
       }
 
@@ -528,6 +553,52 @@ document.getElementById("secretCodeDisplay").textContent =
     function showEnding() {
 
       document.getElementById("gameScreen").classList.add("hidden");
+
+      <main class="box hidden" id="accessDeniedScreen">
+
+  <div class="eyebrow">ORISON SECURITY SYSTEM</div>
+
+  <div class="denied-icon">✕</div>
+
+  <h1 class="denied-title">ACCESS DENIED</h1>
+
+  <p class="denied-message">
+    Your response could not be verified.
+    This orison remains locked.
+  </p>
+
+  <p class="denied-submessage">
+    PLEASE TRY AGAIN.
+  </p>
+
+  <button class="main-button" onclick="goBackToQuestion()">
+    ← GO BACK
+  </button>
+
+</main>
+
+.denied-icon {
+  font-size: 55px;
+  color: #c65b55;
+  margin: 20px 0;
+}
+
+.denied-title {
+  color: #c65b55;
+  letter-spacing: 4px;
+}
+
+.denied-message {
+  margin-top: 20px;
+  line-height: 1.7;
+}
+
+.denied-submessage {
+  color: #d7ad78;
+  letter-spacing: 3px;
+  font-size: 12px;
+  margin: 25px 0;
+}
 
       document.getElementById("endingScreen").classList.remove("hidden");
 
